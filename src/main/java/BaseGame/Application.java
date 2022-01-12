@@ -2,16 +2,8 @@ package BaseGame;
 
 import java.awt.*;
 import javax.swing.*;
-import java.util.ArrayList;
 
-// internal clases
-
-import Tiles.TileMesh;
-import FOO.FOO;
 import Input.Keyboard;
-import Layers.Layer;
-import Sprites.Sprite;
-import Sprites.SpriteAnimation;
 
 // subclase de Canvas que usa elementos de la interfaz runnablee(similar to thread)
 public class Application extends JComponent implements Runnable{ // para no dibujar directo sobre la ventana
@@ -29,7 +21,8 @@ public class Application extends JComponent implements Runnable{ // para no dibu
     private RenderingHints rh;
     
     private TitleScreen ts;
-     
+    private Keyboard input; 
+    
     @Override
     protected void paintComponent(Graphics graf){
        
@@ -51,6 +44,16 @@ public class Application extends JComponent implements Runnable{ // para no dibu
     
     private void update(){
     
+        if(this.input.key[38]){ // up
+        
+            this.ts.setSelector((short)0);
+            
+        }else if(this.input.key[40]){ // down
+        
+            this.ts.setSelector((short)1);
+            
+        }
+        
     }
     
     //PUBLIC
@@ -68,6 +71,10 @@ public class Application extends JComponent implements Runnable{ // para no dibu
         ts = new TitleScreen(this.WIDTH, this.HEIGHT);
         
         this.setPreferredSize(dimensions);
+        
+        input = new Keyboard();
+        
+        this.addKeyListener(input);
         
         this.setFocusable(true);
     }

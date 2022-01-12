@@ -2,19 +2,17 @@ package Input;
 
 import java.awt.event.*;
 
-import FOO.FOO;
-
 public class Keyboard implements KeyListener{
 
-    //PRIVADO
+    //PRIVATE
     
-    //PUBLICO
+    //PUBLIC
     
-    public boolean tecla[];
+    public boolean key[];
     
     public Keyboard(){
     
-        this.tecla = new boolean[256];
+        this.key = new boolean[256];
         
     }
     
@@ -28,14 +26,14 @@ public class Keyboard implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         
-        tecla[e.getKeyCode()] = true;
+        key[e.getKeyCode()] = true;
         
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         
-        tecla[e.getKeyCode()] = false;
+        key[e.getKeyCode()] = false;
         
     }
     

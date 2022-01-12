@@ -11,7 +11,7 @@ public class Mario extends FOO{
     
     private int posX, posY;
     
-    private SpriteAnimation foward;
+    private SpriteAnimation foward, idle;
     
     //PUBLIC
 
@@ -23,19 +23,35 @@ public class Mario extends FOO{
         
         Sprite spriteSheet = new Sprite("index.png", 40);
         
-        BufferedImage[] fowardI  = {spriteSheet.getSprite(2, 0), spriteSheet.getSprite(3, 0), spriteSheet.getSprite(4, 0), spriteSheet.getSprite(5, 0)};
+        BufferedImage[] fowardB = {spriteSheet.getSprite(2, 0), spriteSheet.getSprite(3, 0), spriteSheet.getSprite(4, 0), spriteSheet.getSprite(5, 0)};
+        BufferedImage[] idleB = {spriteSheet.getSprite(0, 0)};
         
-        foward = new SpriteAnimation(fowardI, 10);
+        foward = new SpriteAnimation(fowardB, 10);
+        idle = new SpriteAnimation(idleB, 10);
 
-        foward.start();
-        this.setSprite(foward);
-        
     }    
 
     @Override
     public void update(){
     
         this.foward.update();
+    
+    }
+    
+    public void setState(int i){
+    
+        switch(i){
+        
+        case 0:
+                
+            idle.start();
+            this.setSprite(idle);
+            
+            break;
+        
+            
+        
+        }
     
     }
     
