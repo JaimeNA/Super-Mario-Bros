@@ -1,7 +1,12 @@
 Input\Keyboard.class
 Tiles\Tile.class
+BaseGame\Data.class
 Tiles\TileMesh.class
+Sprites\Frame.class
+Layers\Layer.class
+FOO\Mario.class
 BaseGame\Application.class
 FOO\FOO.class
 Sprites\Sprite.class
+BaseGame\TitleScreen.class
 Sprites\SpriteAnimation.class

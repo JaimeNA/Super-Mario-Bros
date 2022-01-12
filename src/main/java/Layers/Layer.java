@@ -6,16 +6,20 @@ import java.util.ArrayList;
 import java.awt.Graphics2D;
 import java.awt.Color;
 
-import Tiles.Tile;
 import FOO.FOO;
+import Tiles.Text;
+import Tiles.Tile;
+import Tiles.TileMesh;
 
 public class Layer {
     
     //PRIVATE
     
     private BufferedImage image;
-    private ArrayList<Tile> tiles;
+    private ArrayList<TileMesh> tiles;
+    private ArrayList<Tile> tile;
     private ArrayList<FOO> foo;
+    private ArrayList<Text> text;
     private Color backCo;
     
     private int imgX, imgY;
@@ -30,7 +34,9 @@ public class Layer {
         this.HEIGHT = h;
         
         tiles = new ArrayList<>();
+        tile = new ArrayList<>();
         foo = new ArrayList<>();
+        text = new ArrayList<>();
         
     }
     
@@ -65,6 +71,16 @@ public class Layer {
         
         }
         
+        if(!this.tile.isEmpty()){
+        
+            for(int i = 0; i < this.tile.size(); i++){ // traverse the list and draw everything
+            
+                this.tile.get(i).render(graf2D);
+            
+            }
+        
+        }
+        
         // FOO
         
         if(!this.foo.isEmpty()){
@@ -77,19 +93,43 @@ public class Layer {
         
         }
         
+        // texts
+        
+        if(!this.text.isEmpty()){
+        
+            for(int i = 0; i < this.text.size(); i++){ 
+            
+                this.text.get(i).render(graf2D);
+            
+            }
+        
+        }
+        
     }
     
     // accessors
     
+    public void addTileMesh(TileMesh mesh){
+    
+        this.tiles.add(mesh);
+    
+    }
+    
     public void addTile(Tile tile){
     
-        this.tiles.add(tile);
+        this.tile.add(tile);
     
     }
     
     public void addFOO(FOO f){
     
         this.foo.add(f);
+        
+    }
+    
+    public void addText(Text t){
+    
+        this.text.add(t);
         
     }
     

@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import Input.Keyboard;
+import Layers.Layer;
 
 // subclase de Canvas que usa elementos de la interfaz runnablee(similar to thread)
 public class Application extends JComponent implements Runnable{ // para no dibujar directo sobre la ventana
@@ -23,6 +24,9 @@ public class Application extends JComponent implements Runnable{ // para no dibu
     private TitleScreen ts;
     private Keyboard input; 
     
+    private Layer background, foreground;
+    private Data gameData;
+    
     @Override
     protected void paintComponent(Graphics graf){
        
@@ -36,8 +40,16 @@ public class Application extends JComponent implements Runnable{ // para no dibu
     
         this.graf2D = (Graphics2D) graf;
         
-        ts.render(graf2D);
+        // drawing all the layers
         
+        this.background.render(graf2D);    
+        this.foreground.render(graf2D);
+        
+        // text
+        
+        this.gameData.render(graf2D);
+        
+        graf2D.drawString("1 PLAYER GAME", 250, 375);
         Toolkit.getDefaultToolkit().sync(); // sincroniza el dibujado en algunos sistemas que usan buffers, como linux
     
     }
@@ -68,7 +80,10 @@ public class Application extends JComponent implements Runnable{ // para no dibu
 
         Dimension dimensions = new Dimension(WIDTH, HEIGHT);
         
-        ts = new TitleScreen(this.WIDTH, this.HEIGHT);
+        this.background = this.foreground = new Layer(WIDTH, HEIGHT);
+        this.gameData = new Data();
+        
+        ts = new TitleScreen(this.background, this.foreground, this.gameData);
         
         this.setPreferredSize(dimensions);
         
@@ -77,6 +92,7 @@ public class Application extends JComponent implements Runnable{ // para no dibu
         this.addKeyListener(input);
         
         this.setFocusable(true);
+        
     }
     
     public static void main(String[] args){
@@ -93,7 +109,7 @@ public class Application extends JComponent implements Runnable{ // para no dibu
         MarioBros.frame.setVisible(true);
 
         MarioBros.start();
-    
+     
     }
     
     public void start(){
