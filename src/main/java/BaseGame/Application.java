@@ -5,6 +5,7 @@ import javax.swing.*;
 
 import Input.Keyboard;
 import Layers.Layer;
+import Stages.Stage1;
 
 // subclase de Canvas que usa elementos de la interfaz runnablee(similar to thread)
 public class Application extends JComponent implements Runnable{ // para no dibujar directo sobre la ventana
@@ -49,7 +50,6 @@ public class Application extends JComponent implements Runnable{ // para no dibu
         
         this.gameData.render(graf2D);
         
-        graf2D.drawString("1 PLAYER GAME", 250, 375);
         Toolkit.getDefaultToolkit().sync(); // sincroniza el dibujado en algunos sistemas que usan buffers, como linux
     
     }
@@ -64,6 +64,10 @@ public class Application extends JComponent implements Runnable{ // para no dibu
         
             this.ts.setSelector((short)1);
             
+        }else if(this.input.key[10]){ // enter - load stage
+        
+            Stage1 s1 = new Stage1(this.background, this.foreground);
+        
         }
         
     }

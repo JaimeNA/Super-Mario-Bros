@@ -1,5 +1,7 @@
 package Tiles;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
 public class Text {
@@ -24,6 +26,10 @@ public class Text {
 
     public void render(Graphics2D graf2D){
    
+        // text configuration
+        graf2D.setColor(new Color(255, 255, 255)); // white color 
+        graf2D.setFont(new Font("8-bit Arcade In", Font.PLAIN, 50));
+        
         graf2D.drawString(this.string, this.posX, this.posY);
     
     }

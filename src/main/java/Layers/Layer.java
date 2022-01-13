@@ -148,4 +148,15 @@ public class Layer {
     
     }
     
+    public void reset(){
+    
+        this.backCo = null;
+        this.image = null;
+        this.tile.clear();
+        this.tiles.clear();
+        this.foo.clear();
+        this.text.clear();
+    
+    }
+    
 }

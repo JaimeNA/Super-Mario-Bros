@@ -70,23 +70,14 @@ public class TitleScreen {
         mario.setState(0);
         this.foreground.addFOO(mario);
         
-        Text playerSel = new Text("1 PLAYER GAME", 250, 375); // text
+        Text playerSel = new Text("1 PLAYER GAME", 250, 375); // mode selection
+        this.foreground.addText(playerSel);
+        playerSel = new Text("2 PLAYER GAME", 240, 425);
+        this.foreground.addText(playerSel);
+        playerSel = new Text("TOP " + gameData.getTop(), 325, 475); // top score
         this.foreground.addText(playerSel);
         
         this.foreground.addTile(selector);
-    }
-    
-    public void render(Graphics2D graf2D){
-    
-        // mode selection
-        
-        graf2D.drawString("1 PLAYER GAME", 250, 375);
-        graf2D.drawString("2 PLAYER GAME", 240, 425);
-        
-        // top score
-        
-        graf2D.drawString("TOP " + gameData.getTop(), 325, 475);
-        
     }
     
     public void setSelector(short i){
