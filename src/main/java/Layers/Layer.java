@@ -10,6 +10,7 @@ import FOO.FOO;
 import Tiles.Text;
 import Tiles.Tile;
 import Tiles.TileMesh;
+import java.awt.Rectangle;
 
 public class Layer {
     
@@ -156,6 +157,35 @@ public class Layer {
         this.tiles.clear();
         this.foo.clear();
         this.text.clear();
+    
+    }
+    
+    public ArrayList<Rectangle> getHitboxes(){ // get all the hitboxes on scene
+    
+        ArrayList<Rectangle> temp = new ArrayList<>();
+        
+        // tile list
+        for(int i = 0; i < tile.size(); i++){
+        
+            if(tile.get(i).getHitbox() != null){ // only add if it have a hitbox
+            
+                temp.add(tile.get(i).getHitbox());
+        
+            }
+        }
+        
+        // tile mesh list
+        for(int i = 0; i < tiles.size(); i++){
+        
+            if(tiles.get(i).getHitbox() != null){ // only add if it have a hitbox
+            
+                    temp.add(tiles.get(i).getHitbox());
+        
+            }
+            
+        }
+        
+        return temp;
     
     }
     

@@ -27,6 +27,7 @@ public class Application extends JComponent implements Runnable{ // para no dibu
     
     private Layer background, foreground;
     private Data gameData;
+    private Stage1 s1;
     
     @Override
     protected void paintComponent(Graphics graf){
@@ -66,8 +67,18 @@ public class Application extends JComponent implements Runnable{ // para no dibu
             
         }else if(this.input.key[10]){ // enter - load stage
         
-            Stage1 s1 = new Stage1(this.background, this.foreground);
-        
+            if(s1 == null){ // first initilize the level
+                
+                s1 = new Stage1(this.background, this.foreground, this.input);
+                
+            }else if(gameData.getTime() == 0){ // if the level didnt load
+                
+                s1.loadLevel();
+                
+                gameData.setTime(s1.getTime());
+                
+            }
+            
         }
         
     }
@@ -165,7 +176,14 @@ public class Application extends JComponent implements Runnable{ // para no dibu
             while(deltaTime >=1){ // 60 updates per seconds
 
                 update();
-
+                
+                if(gameData.getTime() != 0){ // if the level was loaded
+                
+                    s1.update();
+                    gameData.setTime(s1.getTime());
+                
+                }
+                
                 deltaTime--;
                 
                 this.repaint(); // repaint

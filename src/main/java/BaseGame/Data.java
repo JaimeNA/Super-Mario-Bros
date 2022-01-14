@@ -55,6 +55,12 @@ public class Data {
         
         graf2d.drawString("TIME", 600, 50);
         
+        if(this.time > 0){
+        
+            graf2d.drawString(time + " ", 600, 80);
+            
+        }
+        
     }
  
     // accessors
@@ -63,6 +69,18 @@ public class Data {
     
         return this.topscore;
     
+    }
+    
+    public void setTime(int t){
+    
+        this.time = t;
+    
+    }
+ 
+    public int getTime(){
+    
+        return this.time;
+        
     }
     
 }

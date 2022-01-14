@@ -2,6 +2,7 @@ package Tiles;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.awt.Rectangle;
 
 import Sprites.Sprite;
 
@@ -14,6 +15,7 @@ public class TileMesh {
     private boolean solid;
     private ArrayList<Tile> mesh;
     private Sprite mainSprite;
+    private Rectangle hitbox;
     
     //PUBLIC
     
@@ -37,6 +39,13 @@ public class TileMesh {
             
             }
         }
+        
+        if(this.solid){
+        
+            hitbox = new Rectangle(posX, posY, WIDTH, HEIGHT);
+        
+        }
+        
     }
     
     public void render(Graphics graf){
@@ -59,6 +68,12 @@ public class TileMesh {
     public int getSize(){ 
     
         return mesh.size();
+    
+    }
+    
+    public Rectangle getHitbox(){
+    
+        return this.hitbox;
     
     }
     
