@@ -17,13 +17,12 @@ public class Layer {
     //PRIVATE
     
     private BufferedImage image;
-    private ArrayList<TileMesh> tiles;
     private ArrayList<Tile> tile;
     private ArrayList<FOO> foo;
     private ArrayList<Text> text;
     private Color backCo;
     
-    private int imgX, imgY;
+    private int imgX, imgY, posX, posY;
     
     private final int WIDTH, HEIGHT;
     
@@ -34,7 +33,9 @@ public class Layer {
         this.WIDTH = w;
         this.HEIGHT = h;
         
-        tiles = new ArrayList<>();
+        this.posX = 0;
+        this.posY = 0;
+        
         tile = new ArrayList<>();
         foo = new ArrayList<>();
         text = new ArrayList<>();
@@ -56,28 +57,18 @@ public class Layer {
         
         if(image != null){ // if the image is not null then draw it
     
-            graf2D.drawImage(this.image, imgX, imgY, null);
+            graf2D.drawImage(this.image, imgX + posX, imgY + posY, null);
             
         }
         
         // tiles
         
-        if(!this.tiles.isEmpty()){
-        
-            for(int i = 0; i < this.tiles.size(); i++){ // traverse the list and draw everything
-            
-                this.tiles.get(i).render(graf2D);
-            
-            }
-        
-        }
-        
         if(!this.tile.isEmpty()){
         
             for(int i = 0; i < this.tile.size(); i++){ // traverse the list and draw everything
             
-                this.tile.get(i).render(graf2D);
-            
+                this.tile.get(i).render(graf2D);               
+                        
             }
         
         }
@@ -112,8 +103,12 @@ public class Layer {
     
     public void addTileMesh(TileMesh mesh){
     
-        this.tiles.add(mesh);
+        for(int i = 0; i < mesh.getSize(); i++){
+        
+            this.tile.add(mesh.getTile(i));
     
+        }
+        
     }
     
     public void addTile(Tile tile){
@@ -149,12 +144,18 @@ public class Layer {
     
     }
     
+    public void move(int x, int y){
+    
+        this.posX += x;
+        this.posY += y;
+    
+    }
+    
     public void reset(){
     
         this.backCo = null;
         this.image = null;
         this.tile.clear();
-        this.tiles.clear();
         this.foo.clear();
         this.text.clear();
     
@@ -172,17 +173,6 @@ public class Layer {
                 temp.add(tile.get(i).getHitbox());
         
             }
-        }
-        
-        // tile mesh list
-        for(int i = 0; i < tiles.size(); i++){
-        
-            if(tiles.get(i).getHitbox() != null){ // only add if it have a hitbox
-            
-                    temp.add(tiles.get(i).getHitbox());
-        
-            }
-            
         }
         
         return temp;

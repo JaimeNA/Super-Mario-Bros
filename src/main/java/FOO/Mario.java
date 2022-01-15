@@ -10,13 +10,10 @@ public class Mario extends FOO{
     //PRIVATE
     
     private int state;
-    
     private SpriteAnimation animation;
-    private final BufferedImage[] idleB, walkB;
+    private final BufferedImage[] idleB, walkB, jumpB;
     
     //PUBLIC
-
-    public int velX, velY;
     
     public Mario(int x, int y) {
         super(x, y);
@@ -27,73 +24,11 @@ public class Mario extends FOO{
         this.walkB = temp;
         BufferedImage[] temp1 = {spriteSheet.getSprite(0, 0)};
         this.idleB = temp1;
+        BufferedImage[] temp2 = {spriteSheet.getSprite(5, 0)};
+        this.jumpB = temp2;
         
     }    
 
-    public void update(){
-    
-        this.animation.update();
-
-        // movement
-        
-        this.move(velX, velY);
-                
-        // gravity
-        
-        velY += 1;
-        
-    }
-    
-    public void foward(){
-   
-        if(this.state != 1){ // if its not walking
-        
-            this.setState(1);
-            
-        }
-        
-        if(this.getWidth() < 0){ // if the sprite is not flipped
-            
-            this.move(-40, 0); // compensating the flipping
-            this.setSize(40, 40); // flipping the sprite - inverse width
-
-        }
-        
-        this.move(4, 0);
-        
-        this.animation.update(); // updating the sprites
-    
-    }
-    
-    public void backward(){
-   
-        if(this.state != 2){ // if its not walking
-        
-            this.setState(2);
-            
-        }
-        
-        if(this.getWidth() > 0){ // if the sprite is not flipped
-        
-            this.move(40, 0);
-            this.setSize(-40, 40); // flipping the sprite - iverse width
-
-        }
-        
-        this.move(-4, 0);
-        
-        this.animation.update(); // updating the sprites
-    
-    }
-    
-    public void jump(){
-    
-        if(velY == 0){
-            this.velY = -10;
-        }
-        
-    }
-    
     // accessors
     
     public void setState(int i){
@@ -121,6 +56,14 @@ public class Mario extends FOO{
         case 2:
                 
             this.animation = new SpriteAnimation(walkB, 10);
+            this.animation.start();
+            this.setSprite(this.animation);
+            
+            break;
+        
+        case 3:
+                
+            this.animation = new SpriteAnimation(jumpB, 10);
             this.animation.start();
             this.setSprite(this.animation);
             

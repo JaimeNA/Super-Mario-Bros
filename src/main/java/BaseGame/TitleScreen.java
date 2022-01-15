@@ -34,7 +34,7 @@ public class TitleScreen {
         
         // tiles
         
-        Sprite tilesSheet = new Sprite("tiles.png", 40); // all the sprites
+        Sprite tilesSheet = new Sprite("tiles.png", 16); // all the sprites
         Sprite itemsSheet = new Sprite("items.png", 40); 
         
         TileMesh floor = new TileMesh(0, 520, 800, 80, true);

@@ -52,7 +52,7 @@ public class Tile {
 
         }else{
             
-            graf.drawImage(this.sprite.getSprite(xGrid, yGrid), this.posX, this.posY, null); // draw specified image
+            graf.drawImage(this.sprite.getSprite(xGrid, yGrid), this.posX, this.posY, this.WIDTH, this.HEIGHT, null); // draw specified image
         
         }
     }
@@ -83,6 +83,18 @@ public class Tile {
     public void setSolid(boolean b){
     
         this.solid = b;
+    
+    }
+    
+    public int getX(){
+    
+        return this.posX;
+    
+    }
+    
+    public int getY(){
+    
+        return this.posY;
     
     }
     

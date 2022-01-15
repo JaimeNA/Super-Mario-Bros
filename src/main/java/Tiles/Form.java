@@ -12,7 +12,7 @@ public class Form {
     
     public Form(int x, int y, short i){
     
-        Sprite tilesSheet = new Sprite("tiles.png", 40);
+        Sprite tilesSheet = new Sprite("tiles.png", 16);
         
         if(i == 0){ // plant
         

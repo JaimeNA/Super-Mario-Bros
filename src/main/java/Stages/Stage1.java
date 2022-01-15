@@ -20,6 +20,7 @@ public class Stage1 {
     private int lives, time, count;
     private Keyboard input;
     private Mario mario;
+    private TileMesh floor;
     
     //PUBLIC
     
@@ -67,34 +68,34 @@ public class Stage1 {
         
         this.mario.update();
         
-        // keyboard input
+         
+                if(input.key[39]){
         
-        if(input.key[39]){
+                   this.mario.foward();
+                   this.mario.setState(1);
         
-            this.mario.foward();
+                }else if(input.key[37]){
         
-        }else if(input.key[37]){
+                    this.mario.backward();
+                    this.mario.setState(1);// fix animations
+                }else if(input.key[32]){ // jump if its on the ground
         
-            this.mario.backward();
+                    this.mario.jump();
         
-        }else if(input.key[32]){
+                }else{ // if its not jumping
         
-            this.mario.jump();
+                    mario.setState(0);
         
-        }else{
+                }
         
-            mario.setState(0);
+        // Collision - EXPERIMENTAL
         
-        }
+        for(int i = 0; i < this.foreground.getHitboxes().size();i++){
         
-        //EXPERIMENTAL
+            if(this.mario.checkYCollision(this.foreground.getHitboxes().get(i))){ // if there is a collision
         
-        for(int i = 0; i<this.foreground.getHitboxes().size();i++){
-        
-            if(this.mario.checkYCollision(this.foreground.getHitboxes().get(i)) && mario.velY > 0){
-        
-                mario.velY -= mario.velY;
-        
+                break; // break the the loop
+                
             }
         }
     }
@@ -115,10 +116,10 @@ public class Stage1 {
         
         // level loading
 
-        Sprite tilesSheet = new Sprite("tiles.png", 40); // all the sprites
+        Sprite tilesSheet = new Sprite("tiles.png", 16); // all the sprites
         Sprite itemsSheet = new Sprite("items.png", 40); 
         
-        TileMesh floor = new TileMesh(0, 520, 800, 80, true);
+        floor = new TileMesh(0, 520, 800, 80, true);
         floor.setSprite(tilesSheet, 0, 0); // getting the floor sprite
      
         mario = new Mario(180, 480); // mario

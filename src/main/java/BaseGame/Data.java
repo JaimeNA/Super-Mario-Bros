@@ -24,7 +24,7 @@ public class Data {
         this.time = 0;
         this.topscore = 0;
         
-        Sprite spriteSheet = new Sprite("tiles.png", 40); // all the sprites
+        Sprite spriteSheet = new Sprite("tiles.png", 16); // all the sprites
         
         this.coint = new Tile(265, 40, false);
         this.coint.setSprite(spriteSheet, 24, 1); // getting the floor sprite
