@@ -39,13 +39,13 @@ public class FOO {
         
         //gravity
         
-        if(!inGround){
-        
-            this.velY += 1;
-        
-        }else if(inGround){
+        if(inGround){
         
             this.velY = 0;
+        
+        }else{
+        
+            this.velY += 1;
         
         }
         
@@ -107,25 +107,12 @@ public class FOO {
 
     }    
     
-    public boolean checkXCollision(Rectangle r){
+    public boolean checkCollision(Rectangle r){
             
         this.hitbox = new Rectangle(posX, posY, WIDTH, HEIGHT); // update hitbox position
         
-        if(abs(this.hitbox.getCenterX() - r.getCenterX()) <= 40){ // check for collision
-            
-            return true;
-            
-        }
-        
-        return false;
-        
-    }
-    
-    public boolean checkYCollision(Rectangle r){
-            
-        this.hitbox = new Rectangle(posX, posY, WIDTH, HEIGHT); // update hitbox position
-        
-        if(abs(this.hitbox.getCenterY() - r.getCenterY()) <= 40){ // check for collision
+        if(abs(this.hitbox.getCenterY() - r.getCenterY()) <= 40 &&
+        abs(this.hitbox.getCenterX() - r.getCenterX()) <= 40){ // check for collision
             
             if(this.hitbox.getCenterY() - r.getCenterY() <= 40){ // if the collision is from bellow
                 
@@ -192,6 +179,12 @@ public class FOO {
     public int getY(){
     
         return this.posY;
+    
+    }
+    
+    public boolean inGround(){
+    
+        return this.inGround;
     
     }
     

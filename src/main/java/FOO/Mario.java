@@ -29,7 +29,19 @@ public class Mario extends FOO{
         
     }    
 
+    public void updateAnimation(){
+    
+        this.animation.update();
+    
+    }
+    
     // accessors
+    
+    public int getState(){
+    
+        return this.state;
+    
+    }
     
     public void setState(int i){
     
@@ -54,14 +66,6 @@ public class Mario extends FOO{
             break;
         
         case 2:
-                
-            this.animation = new SpriteAnimation(walkB, 10);
-            this.animation.start();
-            this.setSprite(this.animation);
-            
-            break;
-        
-        case 3:
                 
             this.animation = new SpriteAnimation(jumpB, 10);
             this.animation.start();

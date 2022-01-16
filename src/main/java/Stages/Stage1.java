@@ -66,38 +66,58 @@ public class Stage1 {
             
         }
         
-        this.mario.update();
+        // MARIO
         
+        // movement
          
-                if(input.key[39]){
+        if(input.key[39]){
         
-                   this.mario.foward();
-                   this.mario.setState(1);
+            this.mario.foward();
+                   
+            if(mario.getState() != 1 && mario.inGround()){ // if the state is not set
+                this.mario.setState(1);
+            }
+                    
+        }else if(input.key[37]){
         
-                }else if(input.key[37]){
+            this.mario.backward();
+               
+            if(mario.getState() != 1 && mario.inGround()){ // if the state is not set
+                this.mario.setState(1);
+            }
+                    
+        }else{ // if its not jumping
         
-                    this.mario.backward();
-                    this.mario.setState(1);// fix animations
-                }else if(input.key[32]){ // jump if its on the ground
+            if(mario.inGround()){ // if it is on the ground
+                mario.setState(0);
+            }
+        }
         
-                    this.mario.jump();
+        if(input.key[32]){ // jump if its on the ground
         
-                }else{ // if its not jumping
+            this.mario.jump();
+           
+            if(mario.getState() != 2){ // if the state is not set
+                this.mario.setState(2);
+            }
+                
+        }
         
-                    mario.setState(0);
-        
-                }
-        
-        // Collision - EXPERIMENTAL
+        mario.updateAnimation();
+                
+        // Collision
         
         for(int i = 0; i < this.foreground.getHitboxes().size();i++){
         
-            if(this.mario.checkYCollision(this.foreground.getHitboxes().get(i))){ // if there is a collision
+            if(this.mario.checkCollision(this.foreground.getHitboxes().get(i))){ // if there is a collision
         
-                break; // break the the loop
+                break; // break the the loop 
                 
             }
         }
+        
+        this.mario.update();
+        
     }
     
     public int getTime(){
