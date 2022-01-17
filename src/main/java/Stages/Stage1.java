@@ -7,6 +7,7 @@ import Sprites.Sprite;
 import Tiles.Text;
 import FOO.Mario;
 import Input.Keyboard;
+import Tiles.Tile;
 import Tiles.TileMesh;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -91,6 +92,7 @@ public class Stage1 {
             if(mario.inGround()){ // if it is on the ground
                 mario.setState(0);
             }
+            
         }
         
         if(input.key[32]){ // jump if its on the ground
@@ -103,6 +105,8 @@ public class Stage1 {
                 
         }
         
+        this.mario.update();
+        
         mario.updateAnimation();
                 
         // Collision
@@ -111,12 +115,10 @@ public class Stage1 {
         
             if(this.mario.checkCollision(this.foreground.getHitboxes().get(i))){ // if there is a collision
         
-                break; // break the the loop 
+                //break; // break the the loop 
                 
             }
         }
-        
-        this.mario.update();
         
     }
     
@@ -145,6 +147,11 @@ public class Stage1 {
         mario = new Mario(180, 480); // mario
         mario.setState(0);
        
+        Tile t = new Tile(220, 400, true);
+        t.setSprite(tilesSheet, 1, 0);
+        
+        Tile t2 = new Tile(260, 360, true);
+        t2.setSprite(tilesSheet, 1, 0);
         this.foreground.reset();
    
         // background
@@ -154,6 +161,8 @@ public class Stage1 {
         // foreground
        
         this.foreground.addTileMesh(floor);
+        this.foreground.addTile(t);
+        this.foreground.addTile(t2);
         this.foreground.addFOO(mario);
         
         // data

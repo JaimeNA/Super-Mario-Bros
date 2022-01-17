@@ -26,6 +26,7 @@ public class FOO {
         
         this.WIDTH = 40;
         this.HEIGHT = 40;
+        this.inGround = true;
         
         this.hitbox = new Rectangle(posX, posY, WIDTH, HEIGHT);
         
@@ -39,11 +40,7 @@ public class FOO {
         
         //gravity
         
-        if(inGround){
-        
-            this.velY = 0;
-        
-        }else{
+        if(!inGround){
         
             this.velY += 1;
         
@@ -73,7 +70,7 @@ public class FOO {
 
         }
         
-        this.move(4, 0);
+        this.velX = 4;
         
     }
     
@@ -86,7 +83,7 @@ public class FOO {
 
         }
         
-        this.move(-4, 0);
+        this.velX = -4;
         
     }
     
@@ -114,11 +111,37 @@ public class FOO {
         if(abs(this.hitbox.getCenterY() - r.getCenterY()) <= 40 &&
         abs(this.hitbox.getCenterX() - r.getCenterX()) <= 40){ // check for collision
             
-            if(this.hitbox.getCenterY() - r.getCenterY() <= 40){ // if the collision is from bellow
+            if(abs(this.hitbox.getCenterX() - r.getCenterX()) < 40){
                 
-                this.inGround = true;
+                if(this.hitbox.getCenterY() - r.getCenterY() <= 0){ // if the collision is from bellow
+                
+                    this.inGround = true;
+                    this.velY = 0;
+                    this.setY((int)r.getCenterY() + 20);
+                    
+                }else if(this.hitbox.getCenterY() - r.getCenterY() >= 0){ // if the collision is from above
+            
+                    this.velY = 1; // go down
+                    this.setY((int)r.getCenterY() - 60);
+                    
+                }
+                
+            }else if(abs(this.hitbox.getCenterY() - r.getCenterY()) < 40){ // if the collision is from bellow
+                
+                if(this.hitbox.getCenterX() - r.getCenterX() <= 0){ // if the collision is from bellow
+                
+                    this.velX = 0;
+                    this.setX((int)r.getCenterX() - 60);
+                    
+                }else if(this.hitbox.getCenterX() - r.getCenterX() >= 0){ // if the collision is from above
+            
+                    this.velX = 0; // go down
+                    this.setX((int)r.getCenterX() + 20);
+                    
+                }
                 
             }
+            
             return true;
             
         }
