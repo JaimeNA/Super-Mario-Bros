@@ -113,11 +113,8 @@ public class Stage1 {
         
         for(int i = 0; i < this.foreground.getHitboxes().size();i++){
         
-            if(this.mario.checkCollision(this.foreground.getHitboxes().get(i))){ // if there is a collision
-        
-                break; // break the the loop 
-                
-            }
+            this.mario.checkCollision(this.foreground.getHitboxes().get(i));
+                    
         }
         
     }
@@ -147,7 +144,7 @@ public class Stage1 {
         mario = new Mario(180, 480); // mario
         mario.setState(0);
        
-        Tile t = new Tile(220, 400, true);
+        Tile t = new Tile(220, 480, true);
         t.setSprite(tilesSheet, 1, 0);
         
         Tile t2 = new Tile(260, 360, true);

@@ -46,6 +46,8 @@ public class FOO {
         
         }
         
+        this.velX = 0;
+        
     }
     
     public void render(Graphics2D graf){
@@ -110,15 +112,15 @@ public class FOO {
         
         if(abs(this.hitbox.getCenterY() - r.getCenterY()) <= 40 &&
         abs(this.hitbox.getCenterX() - r.getCenterX()) <= 40){ // check for collision
-            
+        
             if(abs(this.hitbox.getCenterX() - r.getCenterX()) < 40){
                 
-                if(this.hitbox.getCenterY() - r.getCenterY() >= 0){ // if the collision is from bellow
+                if(this.hitbox.getCenterY() - r.getCenterY() > 0){ // if the collision is from bellow
                 
                     this.velY = 1;
                     this.setY((int)r.getCenterY() + 20);
                     
-                }else if(this.hitbox.getCenterY() - r.getCenterY() <= 0){ // if the collision is from above
+                }else if(this.hitbox.getCenterY() - r.getCenterY() < 0){ // if the collision is from above
             
                     this.inGround = true;
                     this.velY = 0; // go down
@@ -126,13 +128,12 @@ public class FOO {
                     
                 }
                 
-            }
-            if(abs(this.hitbox.getCenterY() - r.getCenterY()) < 40){ // if the collision is on the sides
+            }if(abs(this.hitbox.getCenterY() - r.getCenterY()) < 40){ // if the collision is on the sides
                 
                 if(this.hitbox.getCenterX() - r.getCenterX() > 0){ 
                 
                     this.velX = 0;
-                    this.setX((int)r.getCenterX() + 20);
+                    this.setX((int)r.getCenterX() + 60);
                     
                 }else if(this.hitbox.getCenterX() - r.getCenterX() < 0){
             
