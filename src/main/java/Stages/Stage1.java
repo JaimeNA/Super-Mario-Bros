@@ -115,7 +115,7 @@ public class Stage1 {
         
             if(this.mario.checkCollision(this.foreground.getHitboxes().get(i))){ // if there is a collision
         
-                //break; // break the the loop 
+                break; // break the the loop 
                 
             }
         }

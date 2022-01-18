@@ -113,30 +113,31 @@ public class FOO {
             
             if(abs(this.hitbox.getCenterX() - r.getCenterX()) < 40){
                 
-                if(this.hitbox.getCenterY() - r.getCenterY() <= 0){ // if the collision is from bellow
+                if(this.hitbox.getCenterY() - r.getCenterY() >= 0){ // if the collision is from bellow
                 
-                    this.inGround = true;
-                    this.velY = 0;
+                    this.velY = 1;
                     this.setY((int)r.getCenterY() + 20);
                     
-                }else if(this.hitbox.getCenterY() - r.getCenterY() >= 0){ // if the collision is from above
+                }else if(this.hitbox.getCenterY() - r.getCenterY() <= 0){ // if the collision is from above
             
-                    this.velY = 1; // go down
+                    this.inGround = true;
+                    this.velY = 0; // go down
                     this.setY((int)r.getCenterY() - 60);
                     
                 }
                 
-            }else if(abs(this.hitbox.getCenterY() - r.getCenterY()) < 40){ // if the collision is from bellow
+            }
+            if(abs(this.hitbox.getCenterY() - r.getCenterY()) < 40){ // if the collision is on the sides
                 
-                if(this.hitbox.getCenterX() - r.getCenterX() <= 0){ // if the collision is from bellow
+                if(this.hitbox.getCenterX() - r.getCenterX() > 0){ 
                 
                     this.velX = 0;
-                    this.setX((int)r.getCenterX() - 60);
-                    
-                }else if(this.hitbox.getCenterX() - r.getCenterX() >= 0){ // if the collision is from above
-            
-                    this.velX = 0; // go down
                     this.setX((int)r.getCenterX() + 20);
+                    
+                }else if(this.hitbox.getCenterX() - r.getCenterX() < 0){
+            
+                    this.velX = 0;
+                    this.setX((int)r.getCenterX() - 60);
                     
                 }
                 
