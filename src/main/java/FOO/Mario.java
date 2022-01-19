@@ -11,7 +11,7 @@ public class Mario extends FOO{
     
     private int state;
     private SpriteAnimation animation;
-    private final BufferedImage[] idleB, walkB, jumpB;
+    private final BufferedImage[] idleB, walkB, jumpB, deadB;
     
     //PUBLIC
     
@@ -26,6 +26,8 @@ public class Mario extends FOO{
         this.idleB = temp1;
         BufferedImage[] temp2 = {spriteSheet.getSprite(5, 0)};
         this.jumpB = temp2;
+        BufferedImage[] temp3 = {spriteSheet.getSprite(6, 0)};
+        this.deadB = temp3;
         
     }    
 
@@ -73,8 +75,24 @@ public class Mario extends FOO{
             
             break;
         
+        case 3:
+                
+            this.animation = new SpriteAnimation(deadB, 10);
+            this.animation.start();
+            this.setSprite(this.animation);
+            
+            break;
+        
         }
     
+    }
+    
+    public void dead(){
+    
+        jump();
+        this.die();
+        this.setState(3);
+        
     }
     
 }

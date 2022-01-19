@@ -14,6 +14,7 @@ public class FOO {
     private boolean inGround;
     private SpriteAnimation sprite;
     private Rectangle hitbox;
+    private boolean dead;
    
     //PUBLIC
     
@@ -38,9 +39,11 @@ public class FOO {
         
         this.move(velX, velY);
         
+        this.hitbox = new Rectangle(posX, posY, WIDTH, HEIGHT); // update hitbox position
+         
         //gravity
         
-        if(!inGround){
+        if(!inGround || dead){ // if its dead or not on the ground
         
             this.velY += 1;
         
@@ -106,49 +109,36 @@ public class FOO {
 
     }    
     
-    public boolean checkCollision(Rectangle r){
-            
-        this.hitbox = new Rectangle(posX, posY, WIDTH, HEIGHT); // update hitbox position
+    public void checkCollision(char map[][]){
         
-        if(abs(this.hitbox.getCenterY() - r.getCenterY()) <= 40 &&
-        abs(this.hitbox.getCenterX() - r.getCenterX()) <= 40){ // check for collision
+        if(map[(posY / 40) + 1][posX / 40] == '#'){ // Y collision
         
-            if(abs(this.hitbox.getCenterX() - r.getCenterX()) < 40){
-                
-                if(this.hitbox.getCenterY() - r.getCenterY() > 0){ // if the collision is from bellow
-                
-                    this.velY = 1;
-                    this.setY((int)r.getCenterY() + 20);
-                    
-                }else if(this.hitbox.getCenterY() - r.getCenterY() < 0){ // if the collision is from above
+            inGround = true;
+            velY = 0;
+            this.setY((posY / 40) * 40);
             
-                    this.inGround = true;
-                    this.velY = 0; // go down
-                    this.setY((int)r.getCenterY() - 60);
-                    
-                }
-                
-            }if(abs(this.hitbox.getCenterY() - r.getCenterY()) < 40){ // if the collision is on the sides
-                
-                if(this.hitbox.getCenterX() - r.getCenterX() > 0){ 
-                
-                    this.velX = 0;
-                    this.setX((int)r.getCenterX() + 60);
-                    
-                }else if(this.hitbox.getCenterX() - r.getCenterX() < 0){
+        }else if(map[(posY / 40)][posX / 40] == '#'){ // Y collision
+        
+            velY = +1;
+            this.setY(((posY / 40) + 1) * 40);
             
-                    this.velX = 0;
-                    this.setX((int)r.getCenterX() - 60);
-                    
-                }
-                
-            }
-            
-            return true;
+        }else{
+        
+            inGround = false;
             
         }
         
-        return false;
+        if(map[(posY / 40)][(posX / 40) + 1] == '#' && this.WIDTH > 0){ // X collision
+        
+            velX = 0;
+            this.setX((posX / 40) * 40);
+            
+        }else if(map[(posY / 40)][(posX / 40) - 1] == '#' && this.WIDTH < 0){ // X collision
+            
+            velX = 0;
+            this.setX(((posX / 40) + 1) * 40);
+            
+        }
         
     }
     
@@ -207,9 +197,28 @@ public class FOO {
     
     }
     
+    public Rectangle getHitbox(){
+    
+        return this.hitbox;
+    
+    }
+    
     public boolean inGround(){
     
         return this.inGround;
+    
+    }
+    
+    public void die(){
+    
+        this.inGround = false; // fall through the floor
+        this.dead = true;
+    
+    }
+    
+    public boolean isDead(){
+    
+        return this.dead;
     
     }
     

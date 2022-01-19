@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import Sprites.Sprite;
+import java.awt.Color;
 
 public class Tile {
 
@@ -47,7 +48,8 @@ public class Tile {
     public void render(Graphics graf){
     
         if(sprite == null){ // if sprite is not specified
-        
+            
+            graf.setColor(new Color(0, 0, 0));
             graf.drawRect(this.posX, this.posY, this.WIDTH, this.HEIGHT); // draw empty square
 
         }else{

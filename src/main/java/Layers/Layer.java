@@ -20,6 +20,7 @@ public class Layer {
     private ArrayList<Tile> tile;
     private ArrayList<FOO> foo;
     private ArrayList<Text> text;
+    private char map[][];
     private Color backCo;
     
     private int imgX, imgY, posX, posY;
@@ -159,6 +160,25 @@ public class Layer {
         this.foo.clear();
         this.text.clear();
     
+    }
+    
+    public void loadMap(char m[][]){
+    
+        // map 
+        
+        for(int i = 0; i < 16; i++){
+            
+            for(int j = 0; j < 24; j++){
+        
+                if(m[i][j] == '#'){
+                
+                    this.tile.add(new Tile(j * 40, i * 40, true));
+                    
+                }
+        
+            }
+        
+        }
     }
     
     public ArrayList<Rectangle> getHitboxes(){ // get all the hitboxes on scene
